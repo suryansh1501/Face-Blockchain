@@ -15,9 +15,9 @@ def main():
     args = parser.parse_args()
 
     load_dotenv()
-    api_key = os.getenv("SERPAPI_KEY")
+    api_key = os.getenv("SERPAPI_API_KEY") or os.getenv("SERPAPI_KEY")
     if not api_key:
-        raise SystemExit("Missing SERPAPI_KEY. Put it in .env")
+        raise SystemExit("Missing SERPAPI_API_KEY. Put it in .env")
 
     image_path = Path(args.image)
     if not image_path.exists():

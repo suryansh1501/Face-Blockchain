@@ -2,5 +2,7 @@
 __pycache__/
 *.pyc
 .env
+.env.*
+!.env.example
 data/blockchain.json
 data/run_result.json

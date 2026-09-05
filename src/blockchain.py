@@ -53,6 +53,14 @@ def verify_chain() -> dict:
             return {"valid": False, "reason": f"bad index at block {i}"}
         if block["previous_hash"] != previous:
             return {"valid": False, "reason": f"broken previous hash at block {i}"}
+        payload = block["payload"]
+        content_hash = payload.get("content_hash")
+        if content_hash:
+            unsigned_payload = {
+                key: value for key, value in payload.items() if key != "content_hash"
+            }
+            if content_hash != sha256_text(canonical_json(unsigned_payload)):
+                return {"valid": False, "reason": f"bad content hash at block {i}"}
         if block["block_hash"] != expected:
             return {"valid": False, "reason": f"tampering detected at block {i}"}
 
