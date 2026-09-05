@@ -1,74 +1,42 @@
-# HH Goa 2026 — Task 3 MVP
-## Face Identification → Web/Social Search → Blockchain Verification
+# Face Identification & Blockchain Verification
 
-This MVP implements the required pipeline:
+## HackerHouse Goa 2026 — Task #3
 
-1. Detect/encode a face from an input image using DeepFace.
-2. Upload the input image to SerpApi Image API and perform a genuine Google Lens search.
-3. Collect visual/exact web matches and optionally verify candidate images against the input face.
-4. Hash the discovered post metadata/content and write it to a local tamper-evident simulated blockchain.
-5. Re-read the blockchain record and verify the hash.
+An end-to-end AI pipeline that takes a face image, detects and encodes the face, performs a genuine reverse-image/web search to discover matching online content, and creates a tamper-evident blockchain record of the discovered result.
 
-> Important: this project does **not** claim that a visual web match is proof of a person's identity. Face similarity is treated as a candidate signal and should be manually reviewed.
+---
 
-## Requirements
+## 🎯 Objective
 
-- Python 3.10+
-- A SerpApi API key for Google Lens.
-- Internet access for the search step.
+The system demonstrates three major capabilities:
 
-## Install
+1. **Face Detection & Encoding**
+2. **Genuine Web / Social Media Search**
+3. **Blockchain-based Verification**
 
-```bash
-python -m venv .venv
-# Windows:
-.venv\Scripts\activate
-# Linux/macOS:
-source .venv/bin/activate
+The complete pipeline runs from a single input image without relying on hardcoded search results.
 
-pip install -r requirements.txt
-```
+---
 
-Create `.env`:
+## 🔄 End-to-End Workflow
 
-```env
-SERPAPI_KEY=your_key_here
-```
-
-## Run
-
-```bash
-python -m src.pipeline --image path/to/face.jpg
-```
-
-Optional:
-
-```bash
-python -m src.pipeline --image path/to/face.jpg --max-results 10
-```
-
-The program creates:
-- `data/blockchain.json` — local simulated blockchain
-- `data/run_result.json` — pipeline output
-
-## Demo flow
-
-**Input face**
-→ DeepFace face detection/embedding
-→ SerpApi Image API upload
-→ Google Lens visual/exact matches
-→ candidate result selection
-→ SHA-256 content fingerprint
-→ local blockchain block
-→ re-hash + on-chain verification
-
-## Why SerpApi?
-
-SerpApi documents an Image API that accepts JPG/JPEG/PNG/WebP uploads and returns an `image_id`; that ID can then be supplied to its Google Lens API. The Lens API returns visual matches and related web data.
-
-## Limitations
-
-- Google Lens results depend on the image, search engine, region and API availability.
-- Social platforms may block automated access or expose limited metadata.
-- A reverse-image result is not automatically a verified identity.
-- The local chain is a simulated blockchain for the MVP. For a stronger final demo, replace `src/blockchain.py` with an Ethereum/Polygon testnet adapter while keeping the same hash payload.
+```text
+Input Face Image
+       ↓
+Face Detection
+       ↓
+Face Encoding using ArcFace
+       ↓
+Reverse Image Search
+       ↓
+Google Lens / Web Results
+       ↓
+Candidate Web & Social Media Matches
+       ↓
+Select Matching Content
+       ↓
+Generate SHA-256 Fingerprint
+       ↓
+Store Fingerprint on Blockchain
+       ↓
+Verify Blockchain Integrity
