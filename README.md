@@ -1,42 +1,42 @@
 # Face Identification & Blockchain Verification
 
-## HackerHouse Goa 2026 — Task #3
+HackerHouse Goa 2026 - Task 3
 
-An end-to-end AI pipeline that takes a face image, detects and encodes the face, performs a genuine reverse-image/web search to discover matching online content, and creates a tamper-evident blockchain record of the discovered result.
+## About the Project
 
----
+This project takes a face image as input, detects and represents the face, searches the web for related content using reverse image search, and creates a tamper-evident record of the selected result using blockchain hashing.
 
-## 🎯 Objective
+The main idea is to connect face processing, real web search, and blockchain verification in one pipeline.
 
-The system demonstrates three major capabilities:
+The project does not use hardcoded social media links. Search results are obtained dynamically during execution.
 
-1. **Face Detection & Encoding**
-2. **Genuine Web / Social Media Search**
-3. **Blockchain-based Verification**
+## How It Works
 
-The complete pipeline runs from a single input image without relying on hardcoded search results.
-
----
-
-## 🔄 End-to-End Workflow
+The complete pipeline works in the following order:
 
 ```text
-Input Face Image
-       ↓
+Input Image
+    |
+    v
 Face Detection
-       ↓
-Face Encoding using ArcFace
-       ↓
+    |
+    v
+Face Representation using ArcFace
+    |
+    v
 Reverse Image Search
-       ↓
+    |
+    v
 Google Lens / Web Results
-       ↓
-Candidate Web & Social Media Matches
-       ↓
-Select Matching Content
-       ↓
-Generate SHA-256 Fingerprint
-       ↓
-Store Fingerprint on Blockchain
-       ↓
-Verify Blockchain Integrity
+    |
+    v
+Candidate Online Content
+    |
+    v
+SHA-256 Fingerprint
+    |
+    v
+Blockchain Record
+    |
+    v
+Blockchain Integrity Check
